@@ -15,6 +15,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             VerveTheme {
+                // The viewModel() function correctly handles AndroidViewModel if used within a ComponentActivity context.
                 val viewModel: QuoteViewModel = viewModel()
                 QuoteScreen(viewModel = viewModel)
             }
