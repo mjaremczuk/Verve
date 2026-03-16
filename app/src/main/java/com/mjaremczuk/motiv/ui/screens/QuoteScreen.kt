@@ -5,8 +5,10 @@ import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.CloudOff
 import androidx.compose.material.icons.rounded.FormatQuote
 import androidx.compose.material.icons.rounded.Refresh
 import androidx.compose.material.icons.rounded.Warning
@@ -67,7 +69,7 @@ fun QuoteScreen(viewModel: QuoteViewModel) {
                 ) { state ->
                     when (state) {
                         is QuoteUiState.Loading -> LoadingContent()
-                        is QuoteUiState.Success -> QuoteContent(state.quote)
+                        is QuoteUiState.Success -> QuoteContent(state.quote, state.isOffline)
                         is QuoteUiState.Error -> ErrorContent(state.message, onRetry = { viewModel.fetchRandomQuote() })
                     }
                 }
@@ -91,7 +93,7 @@ fun LoadingContent() {
 }
 
 @Composable
-fun QuoteContent(quote: Quote) {
+fun QuoteContent(quote: Quote, isOffline: Boolean) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -99,6 +101,11 @@ fun QuoteContent(quote: Quote) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+        if (isOffline) {
+            OfflineIndicator()
+            Spacer(modifier = Modifier.height(16.dp))
+        }
+
         Card(
             modifier = Modifier
                 .fillMaxWidth()
@@ -169,6 +176,32 @@ fun QuoteContent(quote: Quote) {
 }
 
 @Composable
+fun OfflineIndicator() {
+    Surface(
+        color = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.9f),
+        contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+        shape = CircleShape,
+        modifier = Modifier.wrapContentSize()
+    ) {
+        Row(
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Icon(
+                imageVector = Icons.Rounded.CloudOff,
+                contentDescription = null,
+                modifier = Modifier.size(16.dp)
+            )
+            Text(
+                text = "Offline Inspiration",
+                style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold)
+            )
+        }
+    }
+}
+
+@Composable
 fun ErrorContent(message: String, onRetry: () -> Unit) {
     Column(
         modifier = Modifier
@@ -213,7 +246,8 @@ fun QuoteContentPreview() {
                     text = "Success is not final, failure is not fatal: it is the courage to continue that counts.",
                     author = "Winston Churchill",
                     html = ""
-                )
+                ),
+                isOffline = true
             )
         }
     }
