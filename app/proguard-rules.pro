@@ -5,12 +5,25 @@
 # For more details, see
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+# Retrofit rules
+-keepattributes Signature, InnerClasses, EnclosingMethod
+-keepattributes RuntimeVisibleAnnotations, RuntimeVisibleParameterAnnotations
+-keepattributes RuntimeInvisibleAnnotations, RuntimeInvisibleParameterAnnotations
+-dontwarn retrofit2.**
+-keep class retrofit2.** { *; }
+
+# Moshi rules
+-keep class com.mjaremczuk.motiv.data.model.** { *; }
+-keep class com.squareup.moshi.** { *; }
+-keep @com.squareup.moshi.JsonClass class *
+-keepclassmembers class * {
+    @com.squareup.moshi.Json *;
+}
+
+# Room rules
+-keep class androidx.room.Room
+-keep class * extends androidx.room.RoomDatabase
+-keep class com.mjaremczuk.motiv.data.local.** { *; }
 
 # Uncomment this to preserve the line number information for
 # debugging stack traces.
