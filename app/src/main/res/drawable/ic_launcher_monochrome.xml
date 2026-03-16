@@ -1,0 +1,17 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Stylized 'V' representing Verve and energy, shifted slightly left and down to create space for the sparkle -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="11"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M32,40 L50,76 L68,40" />
+    <!-- Sparkle/Inspiration Star, moved further top-right, perfectly clear of the 'V' and within the 66dp center safe zone -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M78,28 C78,28 79,33 84,34 C79,35 78,40 78,40 C78,40 77,35 72,34 C77,33 78,28 78,28 Z" />
+</vector>
