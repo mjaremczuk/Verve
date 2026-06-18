@@ -1,0 +1,8 @@
+[
+  { "key": "stoic", "displayName": "Stoic" },
+  { "key": "motivation", "displayName": "Motivation" },
+  { "key": "programming", "displayName": "Coding" },
+  { "key": "mindfulness", "displayName": "Mindfulness" },
+  { "key": "wisdom", "displayName": "Wisdom" },
+  { "key": "success", "displayName": "Success" }
+]
