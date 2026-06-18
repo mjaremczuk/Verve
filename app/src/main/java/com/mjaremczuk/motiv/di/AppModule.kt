@@ -13,6 +13,7 @@ import com.mjaremczuk.motiv.domain.usecase.GetRandomQuoteUseCase
 import com.mjaremczuk.motiv.domain.usecase.ToggleNotificationsUseCase
 import com.mjaremczuk.motiv.domain.usecase.UpdateNotificationTimeUseCase
 import com.mjaremczuk.motiv.ui.viewmodel.QuoteViewModel
+import com.mjaremczuk.motiv.BuildConfig
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import org.koin.android.ext.koin.androidContext
@@ -40,20 +41,24 @@ val appModule = module {
 
     // OkHttpClient
     single {
-        val loggingInterceptor = HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
-        }
-        OkHttpClient.Builder()
+        val builder = OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
-            .addInterceptor(loggingInterceptor)
             .addInterceptor { chain ->
                 val request = chain.request().newBuilder()
                     .header("User-Agent", "Verve-Motivation-App/1.0.0 (Android)")
                     .build()
                 chain.proceed(request)
             }
-            .build()
+
+        if (BuildConfig.DEBUG) {
+            val loggingInterceptor = HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            }
+            builder.addInterceptor(loggingInterceptor)
+        }
+
+        builder.build()
     }
 
     // Retrofit API
