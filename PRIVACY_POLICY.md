@@ -1,6 +1,6 @@
 # Privacy Policy for Verve
 
-**Effective Date: March 16, 2026**
+**Effective Date: June 18, 2026**
 
 This Privacy Policy describes how **Verve** ("the App"), developed by **MJaremczuk**, handles your information. Your privacy is critically important to us, and we are committed to being transparent about our data practices.
 
@@ -11,12 +11,12 @@ Verve is a motivational quotes application designed to provide daily inspiration
 **No Personal Data Collection:** Verve does **not** collect any personally identifiable information (PII), such as your name, email address, phone number, or precise location. 
 
 **App Functionality:**
-*   **Quote Fetching:** The App fetches motivational quotes from the **ZenQuotes.io API**. This process involves a standard network request which may transmit your IP address to the API provider as part of the normal operation of the internet, but this data is not seen, stored, or used by Verve.
+*   **Quote Fetching:** The App fetches motivational quotes and category lists from our curated static JSON files hosted in our GitHub repository via the secure **jsDelivr CDN**. This process involves a standard HTTPS network request which may transmit your IP address to the CDN provider as part of the normal operation of the internet, but this data is not seen, stored, or used by Verve or its developer.
 *   **Local Caching:** To provide a seamless offline experience, the App uses a local **Room database** to cache previously fetched quotes. This data remains strictly on your device and is never transmitted to our servers or any third parties.
 
 ### 3. Third-Party Services
 Verve utilizes the following third-party service:
-*   **ZenQuotes.io API:** Used to provide the motivational content. Their use of any data (such as IP addresses during requests) is governed by their own privacy policy. We encourage you to review the policies of any third-party services used within the App.
+*   **jsDelivr CDN:** Used to deliver the static motivational content. Their use of any data (such as IP addresses during requests) is governed by their own privacy policy. We encourage you to review the policies of any third-party services used within the App.
 
 ### 4. Data Security
 Since the App does not collect or transmit personal data, there is no risk of your personal information being compromised through our App. Any data stored locally (cached quotes) is protected by the standard security features of the Android operating system.
